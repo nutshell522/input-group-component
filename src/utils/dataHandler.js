@@ -9,13 +9,13 @@ export const addComma = (num) => {
 
   /**
    * 正規表達式: /\B(?=(\d{3})+(?!\d))/g
-   * 解釋:
-   * \B : 表示「非單詞邊界」，這個匹配是用來避免在數字的開頭添加逗號。例如在 `-7855948` 中，不會在負號之後立即添加逗號。
-   * (?=...) : 正向先行斷言 (lookahead)，確保後面跟隨的模式可以匹配，但不消耗這些字符（即，不包含這些字符在最終匹配結果中）。
-   * (\d{3}) : 匹配三個連續的數字。這是用來捕捉每三位數。
-   * + : 指定可以有一個或多個三位數的組合。這意味著，正則會作用於每組三個數字，而不會只匹配一次。
-   * (?!\d) : 負向先行斷言，確保後面不是一個數字。這樣可以避免在數字的末尾加入多餘的逗號。
-   * g : 全局標誌，確保正則表達式應用於字串中的所有符合條件的部分，而不僅僅是第一個匹配結果。
+   * 簡述:
+   * \B : 非單詞邊界，避免在數字開頭添加逗號。
+   * (?=...) : 正向先行斷言，確保每組三位數後可以插入逗號。
+   * (\d{3}) : 匹配三位數字組。
+   * + : 匹配多組三位數。
+   * (?!\d) : 負向先行斷言，避免在最後一位數後插入逗號。
+   * g : 全局匹配，應用於整個字串。
    */
   const int = integer.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
@@ -28,6 +28,11 @@ export const addComma = (num) => {
  *  @return - output: { overlap: [[6, 8], [17, 17]], notInclude: [[0, 4], [12, 13]] }
  */
 export const getNumberIntervals = (rangeList) => {
+  // 如果區間列表為空，則返回 0 到 20 的未包含區間
+  if (rangeList.length === 0 || rangeList[0].length === 0) {
+    return { overlap: [], notInclude: [[0, 20]] };
+  }
+
   // 將區間根據起點進行排序
   rangeList.sort((a, b) => a[0] - b[0]);
 
@@ -42,17 +47,13 @@ export const getNumberIntervals = (rangeList) => {
   for (let i = 1; i < rangeList.length; i++) {
     let next = rangeList[i];
 
-    // 如果當前區間和下一個區間有重疊
+    // 如果當前區間和下一個區間有重疊，則合併這兩個區間
     if (current[1] >= next[0]) {
-      // 如果有重疊，記錄重疊的區間
       overlap.push([Math.max(current[0], next[0]), Math.min(current[1], next[1])]);
-
-      // 合併兩個區間
       current[1] = Math.max(current[1], next[1]);
     } else {
       // 如果沒有重疊，將當前區間放入合併結果
       merged.push(current);
-      // 更新當前區間為下一個區間
       current = next;
     }
   }
@@ -70,8 +71,6 @@ export const getNumberIntervals = (rangeList) => {
     if (start > lastEnd) {
       notInclude.push([lastEnd, start - 1]);
     }
-
-    // 更新 lastEnd 為當前區間的結束值加 1
     lastEnd = end + 1;
   }
 
@@ -80,6 +79,5 @@ export const getNumberIntervals = (rangeList) => {
     notInclude.push([lastEnd, 20]);
   }
 
-  // 返回重疊區間和未包含區間
   return { overlap, notInclude };
 };

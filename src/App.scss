@@ -80,6 +80,22 @@
 }
 
 .text-bg-error {
-  color: #f58b6e;
-  background-color: #fae6e6;
+  color: #fb5324 !important;
+  background-color: #fae6e6 !important;
+}
+
+.close-button {
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+.add-button {
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  font-size: 23px;
 }

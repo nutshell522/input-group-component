@@ -22,7 +22,7 @@ const AgeSelect = ({
       <Form.Select
         className={`py-4 ${className} ${error ? 'is-invalid' : ''}`}
         aria-label={label}
-        value={value}
+        value={typeof value === 'number' ? value : ''}
         onChange={onChange}>
         <option value="" disabled>
           {placeholder}

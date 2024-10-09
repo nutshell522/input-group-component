@@ -6,7 +6,7 @@ const Error = ({ error, errorMessage }) => {
   return (
     <>
       {error && (
-        <Card className="text-bg-error w-100 text-start px-3 py-1" size="sm">
+        <Card className=" w-100 text-start px-3 py-1 text-bg-error" size="sm">
           {errorMessage}
         </Card>
       )}

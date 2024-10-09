@@ -1,13 +1,13 @@
-import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import InfoInputGroup from './components/InfoInputGroup';
+import './App.scss';
 import { Container } from 'react-bootstrap';
+import AgeGroupPriceList from './components/settings/AgeGroupPriceList';
 
 function App() {
   return (
     <div className="App">
       <Container>
-        <InfoInputGroup index="1" />
+        <AgeGroupPriceList onChange={(result) => console.log(result)} />
       </Container>
     </div>
   );
