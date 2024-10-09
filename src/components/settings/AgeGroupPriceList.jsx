@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import AgeGroupPriceSettings from './AgeGroupPriceSettings';
-import { Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import IconButton from '../common/IconButton';
 import { getNumberIntervals } from '../../utils/dataHandler';
 
@@ -74,12 +74,14 @@ const AgeGroupPriceList = ({ onChange }) => {
         />
       ))}
       <Row className="mt-3">
-        <IconButton
-          type="plus"
-          onClick={handleAddClick}
-          label="新增價格設定"
-          className="text-primary add-button"
-        />
+        <Col className="d-flex justify-content-start align-items-center">
+          <IconButton
+            type="plus"
+            onClick={handleAddClick}
+            label="新增價格設定"
+            className="text-primary add-button"
+          />
+        </Col>
       </Row>
     </>
   );

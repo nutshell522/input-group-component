@@ -12,7 +12,7 @@ const PriceInput = ({ value, onChange }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [onFocus, setOnFocus] = useState(false);
 
-  // TODO 開頭不可為0
+  // TODO 開頭為0 或 -0時
 
   // 欄位驗證
   useEffect(() => {
@@ -28,6 +28,7 @@ const PriceInput = ({ value, onChange }) => {
 
   // 處理輸入變更
   const handleChange = (e) => {
+    console.log(e.target.value);
     if (onChange) onChange(e.target.value);
   };
 
